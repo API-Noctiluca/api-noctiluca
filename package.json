@@ -1,0 +1,31 @@
+{
+  "name": "api-noctiluca",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll --no-cache --detectOpenHandles"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/API-Noctiluca/api-noctiluca.git"
+  },
+  "keywords": [],
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/API-Noctiluca/api-noctiluca/issues"
+  },
+  "homepage": "https://github.com/API-Noctiluca/api-noctiluca#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.3",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "jest": "^30.1.1",
+    "supertest": "^7.1.4"
+  }
+}
