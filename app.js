@@ -22,23 +22,23 @@ app.use(express.json({ limit: "1mb" }));
 app.use(morgan("dev"));
 app.use(logger);
 
-// Middleware obligatorio para Content-Type JSON
+// Middleware obligatorio para Content-Type JSON, con esto (GET /api/butterflies desde navegador ya funciona)
 app.use((req, res, next) => {
-  if (!req.is('application/json')) {
-    return res.status(415).json({ error: 'Content-Type debe ser application/json' });
-  }
-  next();
+    if (["POST", "PUT", "PATCH"].includes(req.method) && !req.is('application/json')) {
+        return res.status(415).json({ error: 'Content-Type debe ser application/json' });
+    }
+    next();
 });
 
 // ---------------------
 // Conexión a la base de datos
 // ---------------------
 try {
-  await db_connection.authenticate();               // Conecta a la DB
-  await ButterflyModel.sync({ force: true });       // Sincroniza el modelo Butterfly
-  console.log("Database connected and Butterfly table synced.");
+    await db_connection.authenticate();               // Conecta a la DB
+    await ButterflyModel.sync({ force: true });       // Sincroniza el modelo Butterfly
+    console.log("Database connected and Butterfly table synced.");
 } catch (err) {
-  console.error("Database connection error:", err);
+    console.error("Database connection error:", err);
 }
 
 // ---------------------
