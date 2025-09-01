@@ -2,7 +2,9 @@ import { Router } from "express";
 
 const router = Router();
 
-// Ruta de prueba temporal
+// Ruta de prueba
 router.get("/", (req, res) => {
-  res.json({ message: "Ruta de mariposas funcionando 🚀" });
+  res.json({ mensaje: "Ruta de mariposas funcionando 🚀" });
 });
+
+export default router;
