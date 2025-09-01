@@ -2,14 +2,13 @@ import express from "express";
 import helmet from "helmet";           // Seguridad HTTP básica
 import cors from "cors";               // Permite que el frontend haga peticiones
 import morgan from "morgan";           // Logs de requests
-import { logger } from "./middlewares/logger.js"; // Logger propio (opcional)
 
-import db_connection from "./database/db_connection.js"
-import ButterflyModel from "./models/ButterflyModel.js"
+import db_connection from "./database/db_connection.js";
+import ButterflyModel from "./models/ButterflyModel.js";
 
-// Importar rutas y middlewares de errores
+// Importar rutas y middlewares desde validators
 import butterflyRoutes from "./routes/butterflyRoutes.js";
-import { notFound, errorHandler } from "./middlewares/errorHandler.js";
+import { logger, notFound, errorHandler } from "./validators/butterfliesValidator.js";
 
 // Inicializar Express
 const app = express();
@@ -17,11 +16,11 @@ const app = express();
 // ---------------------
 // Middlewares globales
 // ---------------------
-app.use(helmet());                      
-app.use(cors());                        
+app.use(helmet());
+app.use(cors());
 app.use(express.json({ limit: "1mb" }));
-app.use(morgan("dev"));                 
-app.use(logger);                        
+app.use(morgan("dev"));
+app.use(logger);
 
 // ---------------------
 // Conexión a la base de datos
@@ -42,8 +41,8 @@ app.use("/api/butterflies", butterflyRoutes);
 // ---------------------
 // Manejo de errores
 // ---------------------
-app.use(notFound);       
-app.use(errorHandler);   
+app.use(notFound);
+app.use(errorHandler);
 
 // ---------------------
 // Arranque del servidor
