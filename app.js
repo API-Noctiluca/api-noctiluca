@@ -22,6 +22,14 @@ app.use(express.json({ limit: "1mb" }));
 app.use(morgan("dev"));
 app.use(logger);
 
+// Middleware obligatorio para Content-Type JSON
+app.use((req, res, next) => {
+  if (!req.is('application/json')) {
+    return res.status(415).json({ error: 'Content-Type debe ser application/json' });
+  }
+  next();
+});
+
 // ---------------------
 // Conexión a la base de datos
 // ---------------------
