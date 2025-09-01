@@ -1,34 +1,33 @@
-// validators/butterfliesValidator.js
 import { body, param, query, validationResult } from "express-validator";
 
 // ---------------------
-// Body rules for create/update butterfly
+// Reglas para crear/actualizar mariposas
 // ---------------------
 export const butterflyBodyRules = [
-  body("name").trim().notEmpty().withMessage("Name is required").isLength({ max: 120 }),
-  body("family").trim().notEmpty().withMessage("Family is required").isLength({ max: 120 }),
-  body("Hábitat").trim().notEmpty().withMessage("Habitat is required").isLength({ max: 500 }),
-  body("Feeding").trim().notEmpty().withMessage("Feeding info is required").isLength({ max: 500 }),
-  body("Morphology").trim().notEmpty().withMessage("Morphology is required").isLength({ max: 800 }),
-  body("Life").trim().notEmpty().withMessage("Life info is required").isLength({ max: 800 }),
-  body("Conservation").trim().notEmpty().withMessage("Conservation info is required").isLength({ max: 500 }),
-  body("about conservation").notEmpty().withMessage("Select conservation status")
-    .isIn(["LC","NT","VU","EN","CR"]).withMessage("Invalid conservation status"),
-  body("Location").trim().notEmpty().withMessage("Location is required").isLength({ max: 1000 }),
-  body("image").optional({ nullable: true, checkFalsy: true }).isURL().withMessage("Image must be a valid URL"),
+  body("name").trim().notEmpty().withMessage("El nombre es obligatorio").isLength({ max: 120 }),
+  body("family").trim().notEmpty().withMessage("La familia es obligatoria").isLength({ max: 120 }),
+  body("Hábitat").trim().notEmpty().withMessage("El hábitat es obligatorio").isLength({ max: 500 }),
+  body("Feeding").trim().notEmpty().withMessage("La alimentación es obligatoria").isLength({ max: 500 }),
+  body("Morphology").trim().notEmpty().withMessage("La morfología es obligatoria").isLength({ max: 800 }),
+  body("Life").trim().notEmpty().withMessage("La vida es obligatoria").isLength({ max: 800 }),
+  body("Conservation").trim().notEmpty().withMessage("La conservación es obligatoria").isLength({ max: 500 }),
+  body("about conservation").notEmpty().withMessage("Selecciona estado de conservación")
+    .isIn(["LC","NT","VU","EN","CR"]).withMessage("Estado de conservación inválido"),
+  body("Location").trim().notEmpty().withMessage("La ubicación es obligatoria").isLength({ max: 1000 }),
+  body("image").optional({ nullable: true, checkFalsy: true }).isURL().withMessage("La imagen debe ser una URL válida"),
   body("other names").optional().isString().trim().isLength({ max: 200 }),
-  body("id").optional().isString().isLength({ min: 6, max: 64 }).withMessage("Invalid ID")
+  body("id").optional().isString().isLength({ min: 6, max: 64 }).withMessage("ID inválido")
 ];
 
 // ---------------------
-// Params rules
+// Validaciones para parámetros
 // ---------------------
 export const idParamRules = [
-  param("id").isString().withMessage("Invalid ID")
+  param("id").isString().withMessage("ID inválido")
 ];
 
 // ---------------------
-// Query rules
+// Validaciones para queries
 // ---------------------
 export const listQueryRules = [
   query("page").optional().isInt({ min: 1 }).toInt(),
@@ -38,7 +37,7 @@ export const listQueryRules = [
 ];
 
 // ---------------------
-// Middleware to check validation results
+// Middleware para revisar los resultados de las validaciones
 // ---------------------
 export const validateResult = (req, res, next) => {
   const errors = validationResult(req);
@@ -49,7 +48,7 @@ export const validateResult = (req, res, next) => {
 };
 
 // ---------------------
-// Optional logger middleware
+// Middleware opcional de logs de requests
 // ---------------------
 export const logger = (req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
@@ -57,16 +56,16 @@ export const logger = (req, res, next) => {
 };
 
 // ---------------------
-// Optional simple 404 middleware
+// Middleware opcional para 404
 // ---------------------
 export const notFound = (req, res, next) => {
-  res.status(404).json({ error: "Resource not found" });
+  res.status(404).json({ error: "Recurso no encontrado" });
 };
 
 // ---------------------
-// Optional simple error handler middleware
+// Middleware opcional para errores 500
 // ---------------------
 export const errorHandler = (err, req, res, next) => {
-  console.error(err);
-  res.status(err.status || 500).json({ error: err.message || "Internal server error" });
+  console.error(err); // log técnico
+  res.status(err.status || 500).json({ error: err.message || "Error interno del servidor" });
 };
