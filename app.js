@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 // ---------------------
 try {
     await db_connection.authenticate();               // Conecta a la DB
-    await ButterflyModel.sync({ force: true });       // Sincroniza el modelo Butterfly
+    await ButterflyModel.sync();       // Sincroniza el modelo Butterfly
     console.log("Database connected and Butterfly table synced.");
 } catch (err) {
     console.error("Database connection error:", err);
@@ -55,5 +55,5 @@ app.use(errorHandler);
 // ---------------------
 // Arranque del servidor
 // ---------------------
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
