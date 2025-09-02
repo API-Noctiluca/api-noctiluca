@@ -11,25 +11,9 @@ const ButterflyModel = db_connection.define('butterflies', {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            notNull: {
-                msg: 'el campo name no se puede estar vacio.'
-            },
-            len: {
-                min: 3,
-                msg: "este campo necesita de tres o más caracteres."
-            }
-        }
     },
     other_names: {
         type: DataTypes.STRING,
-        validate: {
-            len:
-            {
-                min: 3,
-                msg: "este campo necesita de tres o más caracteres."
-            }
-        }
     },
     family: {
         type: DataTypes.STRING,
