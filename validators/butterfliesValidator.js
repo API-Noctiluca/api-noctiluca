@@ -6,16 +6,17 @@ import { body, param, query, validationResult } from "express-validator";
 export const butterflyBodyRules = [
   body("name").trim().notEmpty().withMessage("El nombre es obligatorio").isLength({ max: 120 }),
   body("family").trim().notEmpty().withMessage("La familia es obligatoria").isLength({ max: 120 }),
-  body("Hábitat").trim().notEmpty().withMessage("El hábitat es obligatorio").isLength({ max: 500 }),
-  body("Feeding").trim().notEmpty().withMessage("La alimentación es obligatoria").isLength({ max: 500 }),
-  body("Morphology").trim().notEmpty().withMessage("La morfología es obligatoria").isLength({ max: 800 }),
-  body("Life").trim().notEmpty().withMessage("La vida es obligatoria").isLength({ max: 800 }),
-  body("Conservation").trim().notEmpty().withMessage("La conservación es obligatoria").isLength({ max: 500 }),
-  body("about conservation").notEmpty().withMessage("Selecciona estado de conservación")
+  body("habitat").trim().notEmpty().withMessage("El hábitat es obligatorio").isLength({ max: 500 }),
+  body("feeding").trim().notEmpty().withMessage("La alimentación es obligatoria").isLength({ max: 500 }),
+  body("morphology").trim().notEmpty().withMessage("La morfología es obligatoria").isLength({ max: 800 }),
+  body("life").trim().notEmpty().withMessage("La vida es obligatoria").isLength({ max: 800 }),
+  body("conservation").trim().notEmpty().withMessage("La conservación es obligatoria").isLength({ max: 500 }),
+  body("about_conservation")
+    .notEmpty().withMessage("Selecciona estado de conservación")
     .isIn(["LC","NT","VU","EN","CR"]).withMessage("Estado de conservación inválido"),
-  body("Location").trim().notEmpty().withMessage("La ubicación es obligatoria").isLength({ max: 1000 }),
+  body("location").trim().notEmpty().withMessage("La ubicación es obligatoria").isLength({ max: 1000 }),
   body("image").optional({ nullable: true, checkFalsy: true }).isURL().withMessage("La imagen debe ser una URL válida"),
-  body("other names").optional().isString().trim().isLength({ max: 200 }),
+  body("other_names").optional().isString().trim().isLength({ max: 200 }),
   body("id").optional().isString().isLength({ min: 6, max: 64 }).withMessage("ID inválido")
 ];
 
