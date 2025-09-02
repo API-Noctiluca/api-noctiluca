@@ -1,10 +1,13 @@
-import { Router } from "express";
+import express from "express";
+import {
+  getAllButterflies,
+  createButterfly,
+  deleteButterfly,
+} from "../controllers/ButterflyController.js";
 
-const router = Router();
+const router = express.Router();
 
-// Ruta de prueba
-router.get("/", (req, res) => {
-  res.json({ mensaje: "Ruta de mariposas funcionando ✅​👏🏼​" });
-});
+router.post("/", createButterfly);
+router.delete("/:id", deleteButterfly);
 
 export default router;
