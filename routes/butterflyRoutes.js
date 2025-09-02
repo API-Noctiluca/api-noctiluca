@@ -9,5 +9,6 @@ const router = express.Router();
 
 router.post("/", createButterfly);
 router.delete("/:id", deleteButterfly);
+router.get("/", getAllButterflies);
 
 export default router;
