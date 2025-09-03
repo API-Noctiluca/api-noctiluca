@@ -1,6 +1,22 @@
 import ButterflyModel from "../models/ButterflyModel.js";
 
 
+// GET - get one butterfly by ID
+export const getOneButterfly = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const butterfly = await ButterflyModel.findByPk(id);
+
+    if (!butterfly) {
+      return res.status(404).json({ message: "Mariposa no encontrada" });
+    }
+
+    res.status(200).json(butterfly);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // POST - create butterfly
 export const createButterfly = async (req, res) => {
   try {
