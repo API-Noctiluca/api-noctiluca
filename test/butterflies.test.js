@@ -27,10 +27,38 @@ describe("test butterflies crud", () => {
     
 
     //Método GET one butterfly/:id
-    // describe("GET/butterflies/:id", () => {
-    //     let response
+    describe("GET /butterflies/:id", () => {
+        let response
+        let createdButterfly = {}
+        beforeEach(async () => {
+            createdButterfly = await ButterflyModel.create({
+                name: "test",
+                other_names: "test",
+                family: "test",
+                location: "test",
+                habitat: "test",
+                morphology: "test",
+                life: "test",
+                feeding: "test",
+                conservation: "test",
+                about_conservation: "LC",
+                image: "test"
+            })
+            response = await request(app).get(`/api/butterflies/${createdButterfly.id}`).send()
+        })
 
-    // })
+        test('should return status 200 and JSON', async () =>{
+            expect(response.status).toBe(200)
+            expect(response.headers['content-type']).toContain('json')
+        })
+
+        test('should return the correct butterfly', async () => {
+            expect(response.body).toBeInstanceOf(Object)
+            expect(response.body.id).toBe(createdButterfly.id)
+            expect(response.body.name).toBe(createdButterfly.name)
+            //añadir todos los campos si quieres
+        })
+    })
     //Método POST one butterfly/:id
 
     //Método PUT one butterfly/:id
