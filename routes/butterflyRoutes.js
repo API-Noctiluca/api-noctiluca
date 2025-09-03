@@ -6,7 +6,7 @@ import {butterflyBodyRules, idParamRules, validateResult} from "../validators/bu
 
 
 const router = express.Router();
-git 
+
 // GET - listado de todas las mariposas
 router.get("/", getAllButterflies);
 
