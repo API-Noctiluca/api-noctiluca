@@ -1,7 +1,5 @@
 import express from "express";
-
 import {getAllButterflies, getOneButterfly, createButterfly,deleteButterfly, updateButterfly} from "../controllers/ButterflyController.js";
-
 import {butterflyBodyRules, idParamRules, validateResult} from "../validators/butterfliesValidator.js";
 
 const router = express.Router();
