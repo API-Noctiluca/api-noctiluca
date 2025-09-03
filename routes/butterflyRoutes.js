@@ -1,6 +1,5 @@
 import express from "express";
 import {
-  getAllButterflies,
   createButterfly,
   deleteButterfly,
 } from "../controllers/ButterflyController.js";
@@ -11,3 +10,4 @@ router.post("/", createButterfly);
 router.delete("/:id", deleteButterfly);
 
 export default router;
+
