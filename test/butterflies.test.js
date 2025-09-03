@@ -2,6 +2,7 @@ import request from "supertest";
 import { app, server } from "../app.js"
 import db_connection from "../database/db_connection.js"
 import ButterflyModel from "../models/ButterflyModel.js";
+import { updateButterfly } from "../controllers/ButterflyController.js";
 
 describe("test butterflies crud", () => {
     beforeAll(async () => { // antes de todo se conecta
@@ -99,7 +100,55 @@ describe("test butterflies crud", () => {
         })
     })
     //Método PUT one butterfly/:id
+    describe("PUT /butterflies/:id", () => {
+        let response 
+        let createdButterfly = {}
+        let updatedData
 
+        beforeEach(async () => {
+            createdButterfly = await ButterflyModel.create({
+                name: "Test original Butterfly",
+                other_names: "Testus original papilio",
+                family: "Family test",
+                location: "Testland origin",
+                habitat: "Test habitat",
+                morphology: "Test origin morphology",
+                life: "Test origin life cycle",
+                feeding: "Test o food",
+                conservation: "Test or conservation",
+                about_conservation: "LC", 
+                image: "testorigin.jpg"
+            })
+
+            updatedData = { 
+                name: "Update Name",
+                location: "Update Location",
+                image: "updated.jpg"
+            }
+    
+            response = await request(app).put(`/api/butterflies/${createdButterfly.id}`).send(updatedData)
+        })
+
+        test("should return status 200 and JSON", () => {
+            expect(response.status).toBe(200)
+            expect(response.headers["content-type"]).toContain("json")
+        })
+
+        test("should return the updated butterfly", () => {
+            expect(response.body).toBeInstanceOf(Object)
+            expect(response.body.id).toBe(createdButterfly.id)
+            expect(response.body.name).toBe(updatedData.name)
+            expect(response.body.location).toBe(updatedData.location)
+            expect(response.body.image).toBe(updatedData.image)
+        })
+
+        test("should update the butterfly in the database", async () => {
+            const butterflyInDB = await ButterflyModel.findByPk(createdButterfly.id) //findByPk: para buscar un registro por su PrimaryKey
+            expect(butterflyInDB.name).toBe(updatedData.name)
+            expect(butterflyInDB.location).toBe(updatedData.location)
+            expect(butterflyInDB.image).toBe(updatedData.image)
+        })
+    })
     //Método DELETE one butterfly/:id
     describe("DELETE /butterflies", () => {
         let response
