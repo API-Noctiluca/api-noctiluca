@@ -4,19 +4,61 @@ import { body, param, query, validationResult } from "express-validator";
 // Reglas para crear/actualizar mariposas
 // ---------------------
 export const butterflyBodyRules = [
-  body("name").trim().notEmpty().withMessage("El nombre es obligatorio").isLength({ max: 120 }),
-  body("family").trim().notEmpty().withMessage("La familia es obligatoria").isLength({ max: 120 }),
-  body("Hábitat").trim().notEmpty().withMessage("El hábitat es obligatorio").isLength({ max: 500 }),
-  body("Feeding").trim().notEmpty().withMessage("La alimentación es obligatoria").isLength({ max: 500 }),
-  body("Morphology").trim().notEmpty().withMessage("La morfología es obligatoria").isLength({ max: 800 }),
-  body("Life").trim().notEmpty().withMessage("La vida es obligatoria").isLength({ max: 800 }),
-  body("Conservation").trim().notEmpty().withMessage("La conservación es obligatoria").isLength({ max: 500 }),
-  body("about conservation").notEmpty().withMessage("Selecciona estado de conservación")
+  body("name")
+    .trim()
+    .notEmpty().withMessage("El nombre es obligatorio")
+    .isLength({ min: 3, max: 50 }).withMessage("Debe tener entre 3 y 50 caracteres"),
+  
+  body("other_names")
+    .optional().isString().trim()
+    .isLength({ max: 100 }).withMessage("No puede superar 100 caracteres"),
+
+  body("family")
+    .trim()
+    .notEmpty().withMessage("La familia es obligatoria")
+    .isLength({ min: 3, max: 50 }).withMessage("Debe tener entre 3 y 50 caracteres"),
+
+  body("location")
+    .trim()
+    .notEmpty().withMessage("La ubicación es obligatoria")
+    .isLength({ min: 10, max: 300 }).withMessage("Debe tener entre 10 y 300 caracteres"),
+
+  body("habitat")
+    .trim()
+    .notEmpty().withMessage("El hábitat es obligatorio")
+    .isLength({ min: 10, max: 50 }).withMessage("Debe tener entre 10 y 50 caracteres"),
+
+  body("morphology")
+    .trim()
+    .notEmpty().withMessage("La morfología es obligatoria")
+    .isLength({ min: 10, max: 50 }).withMessage("Debe tener entre 10 y 50 caracteres"),
+
+  body("life")
+    .trim()
+    .notEmpty().withMessage("La vida es obligatoria")
+    .isLength({ min: 10, max: 200 }).withMessage("Debe tener entre 10 y 200 caracteres"),
+
+  body("feeding")
+    .trim()
+    .notEmpty().withMessage("La alimentación es obligatoria")
+    .isLength({ min: 5, max: 100 }).withMessage("Debe tener entre 5 y 100 caracteres"),
+
+  body("conservation")
+    .trim()
+    .notEmpty().withMessage("La conservación es obligatoria")
+    .isLength({ min: 2, max: 100 }).withMessage("Debe tener entre 2 y 100 caracteres"),
+
+  body("about_conservation")
+    .notEmpty().withMessage("Selecciona estado de conservación")
     .isIn(["LC","NT","VU","EN","CR"]).withMessage("Estado de conservación inválido"),
-  body("Location").trim().notEmpty().withMessage("La ubicación es obligatoria").isLength({ max: 1000 }),
-  body("image").optional({ nullable: true, checkFalsy: true }).isURL().withMessage("La imagen debe ser una URL válida"),
-  body("other names").optional().isString().trim().isLength({ max: 200 }),
-  body("id").optional().isString().isLength({ min: 6, max: 64 }).withMessage("ID inválido")
+
+  body("image")
+    .optional({ nullable: true, checkFalsy: true })
+    .isURL().withMessage("La imagen debe ser una URL válida"),
+
+  body("id")
+    .optional()
+    .isString().isLength({ min: 1, max: 64 }).withMessage("ID inválido")
 ];
 
 // ---------------------
