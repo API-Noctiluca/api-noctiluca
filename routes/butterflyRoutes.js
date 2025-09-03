@@ -1,15 +1,9 @@
 import express from "express";
-<<<<<<<<< Temporary merge branch 1
-import {getAllButterflies, createButterfly,deleteButterfly} from "../controllers/ButterflyController.js";
+import {getAllButterflies, getOneButterfly,createButterfly,deleteButterfly} from "../controllers/ButterflyController.js";
 
 import {butterflyBodyRules, idParamRules, validateResult} from "../middlewares/butterfliesValidator.js";
-=========
-import {
-  createButterfly,
-  deleteButterfly,
-} from "../controllers/ButterflyController.js";
-import { getAllButterflies } from "../controllers/ButterflyControllers1.js";
->>>>>>>>> Temporary merge branch 2
+
+
 
 const router = express.Router();
 
