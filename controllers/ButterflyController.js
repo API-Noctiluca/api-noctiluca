@@ -39,16 +39,16 @@ export const createButterfly = async (req, res) => {    // con export const crea
 // DELETE - delete butterfly
 export const deleteButterfly = async (req, res) => {
   try {
-    const { id } = req.params;
-    const butterfly = await ButterflyModel.findByPk(id);
+    const { id } = req.params; // Extrae el id de la URL (/api/butterflies/:id). Ejemplo: si haces DELETE /api/butterflies/3, entonces req.params.id = 3.
+    const butterfly = await ButterflyModel.findByPk(id); //Usa Sequelize (ButterflyModel) para buscar un registro por su Primary Key (findByPk). Si existe una mariposa con ese id, se guarda en la variable butterfly. Si no existe, butterfly será null.
 
     if (!butterfly) {
-      return res.status(404).json({ message: "Butterfly not found" });
+      return res.status(404).json({ message: "Butterfly not found" }); //Valida si no se encontró la mariposa. Si no existe: Devuelve un 404 Not Found. Con un JSON de error { message: "Butterfly not found" }. El return corta la ejecución aquí para no seguir con el borrado.
     }
 
-    await butterfly.destroy();
-    res.status(200).json({ message: "Butterfly deleted successfully" });
+    await butterfly.destroy(); //Si la mariposa existe, llama al método .destroy() del modelo para eliminarla de la base de datos.
+    res.status(200).json({ message: "Butterfly deleted successfully" }); //Responde al cliente con un 200 OK. Envía un mensaje de confirmación: "Butterfly deleted successfully".
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message }); //Si ocurre cualquier error inesperado (problema con la base de datos, Sequelize, etc.): Se captura en el catch. Se responde con 500 Internal Server Error. Y se devuelve el mensaje del error en JSON.
   }
 };
