@@ -26,6 +26,24 @@ export const getOneButterfly = async (req, res) => {
   }
 };
 
+//Método PUT - Actualiza una mariposa
+export const updateButterfly = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const butterfly = await ButterflyModel.findByPk(id);
+
+        if (!butterfly) {
+            return res.status(404).json({ message: "Mariposa no encontrada" });
+        }
+
+        await butterfly.update(req.body);
+        res.status(200).json(butterfly);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
 // POST - create butterfly
 export const createButterfly = async (req, res) => {    // con export const createButterfly: se crea y exporta la función llamada createButterfly para poder usarla en otros archivos y async (req, res) => { ... }: es una función asíncrona que recibe dos objetos de Express req (request): contiene información de la solicitud, como headers, body y params. res (response): sirve para enviar la respuesta de vuelta al cliente.
   try {      //inicia un bloque try/catch para manejar errores. Todo lo que esté dentro de try se intenta ejecutar normalmente; si hay un error, se pasa al catch

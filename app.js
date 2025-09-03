@@ -6,9 +6,11 @@ import morgan from "morgan";           // Logs de requests
 import db_connection from "./database/db_connection.js";
 import ButterflyModel from "./models/ButterflyModel.js";
 
+import { PORT, HOST } from "./config/config.js";
 // Importar rutas y middlewares desde validators
 import butterflyRoutes from "./routes/butterflyRoutes.js";
 import { logger, notFound, errorHandler } from "./validators/butterfliesValidator.js";
+
 
 // Inicializar Express
 export const app = express();
@@ -57,9 +59,7 @@ app.use(errorHandler);
 // ---------------------
 // Arranque del servidor
 // ---------------------
-export const PORT = process.env.PORT;
-app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
 
-export const server = app.listen(3000, () => {
-    console.log(`API running on http://localhost:${PORT}`)
+export const server = app.listen(PORT, () => {
+    console.log(`API running on http://${HOST}:${PORT}`)
 })
