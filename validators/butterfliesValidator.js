@@ -7,7 +7,7 @@ export const butterflyBodyRules = [
   body("name")
     .trim()
     .notEmpty().withMessage("El nombre es obligatorio")
-    .isLength({ min: 3, max: 50 }).withMessage("Debe tener entre 3 y 50 caracteres"),
+    .isLength({ max: 150 }).withMessage("Debe tener entre 3 y 50 caracteres"),
   
   body("other_names")
     .optional().isString().trim()
@@ -16,37 +16,37 @@ export const butterflyBodyRules = [
   body("family")
     .trim()
     .notEmpty().withMessage("La familia es obligatoria")
-    .isLength({ min: 3, max: 50 }).withMessage("Debe tener entre 3 y 50 caracteres"),
+    .isLength({ max: 150 }).withMessage("Debe tener entre 3 y 50 caracteres"),
 
   body("location")
     .trim()
     .notEmpty().withMessage("La ubicación es obligatoria")
-    .isLength({ min: 10, max: 300 }).withMessage("Debe tener entre 10 y 300 caracteres"),
+    .isLength({ max: 300 }).withMessage("Debe tener entre 10 y 300 caracteres"),
 
   body("habitat")
     .trim()
     .notEmpty().withMessage("El hábitat es obligatorio")
-    .isLength({ min: 10, max: 50 }).withMessage("Debe tener entre 10 y 50 caracteres"),
+    .isLength({ max: 250 }).withMessage("Debe tener entre 10 y 50 caracteres"),
 
   body("morphology")
     .trim()
     .notEmpty().withMessage("La morfología es obligatoria")
-    .isLength({ min: 10, max: 50 }).withMessage("Debe tener entre 10 y 50 caracteres"),
+    .isLength({ max: 300 }).withMessage("Debe tener entre 10 y 50 caracteres"),
 
   body("life")
     .trim()
     .notEmpty().withMessage("La vida es obligatoria")
-    .isLength({ min: 10, max: 200 }).withMessage("Debe tener entre 10 y 200 caracteres"),
+    .isLength({ max: 250 }).withMessage("Debe tener entre 10 y 200 caracteres"),
 
   body("feeding")
     .trim()
     .notEmpty().withMessage("La alimentación es obligatoria")
-    .isLength({ min: 5, max: 100 }).withMessage("Debe tener entre 5 y 100 caracteres"),
+    .isLength({ max: 250 }).withMessage("Debe tener entre 5 y 100 caracteres"),
 
   body("conservation")
     .trim()
     .notEmpty().withMessage("La conservación es obligatoria")
-    .isLength({ min: 2, max: 100 }).withMessage("Debe tener entre 2 y 100 caracteres"),
+    .isLength({ max: 250 }).withMessage("Debe tener entre 2 y 100 caracteres"),
 
   body("about_conservation")
     .notEmpty().withMessage("Selecciona estado de conservación")
@@ -58,7 +58,7 @@ export const butterflyBodyRules = [
 
   body("id")
     .optional()
-    .isString().isLength({ min: 1, max: 64 }).withMessage("ID inválido")
+    .isString().withMessage("ID inválido")
 ];
 
 // ---------------------
