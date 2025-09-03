@@ -11,8 +11,10 @@ import butterflyRoutes from "./routes/butterflyRoutes.js";
 import { logger, notFound, errorHandler } from "./validators/butterfliesValidator.js";
 
 // Inicializar Express
-const app = express();
-
+export const app = express();
+app.get("/", (req, res) => {
+    res.send("Hola API")
+})
 // ---------------------
 // Middlewares globales
 // ---------------------
@@ -55,5 +57,9 @@ app.use(errorHandler);
 // ---------------------
 // Arranque del servidor
 // ---------------------
-const PORT = process.env.PORT;
+export const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
+
+export const server = app.listen(3000, () => {
+    console.log(`API running on http://localhost:${PORT}`)
+})
