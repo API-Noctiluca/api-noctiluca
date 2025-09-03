@@ -1,10 +1,9 @@
 import { Sequelize } from "sequelize";
-import dotenv from "dotenv";
-dotenv.config();
+import { DB_NAME, USER_DB, PASSWORD_DB, HOST, DB_DIALECT } from "../config/config.js";
 
-const db_connection = new Sequelize(process.env.DB_NAME, process.env.USER_DB, process.env.PASSWORD_DB, {
-    host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT,
+const db_connection = new Sequelize(DB_NAME, USER_DB, PASSWORD_DB, {
+    host: HOST,
+    dialect: DB_DIALECT,
     define: {
         timestamps: true,
         underscored: true
