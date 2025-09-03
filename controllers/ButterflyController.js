@@ -26,6 +26,24 @@ export const getOneButterfly = async (req, res) => {
   }
 };
 
+//Método PUT - Actualiza una mariposa
+export const updateButterfly = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const butterfly = await ButterflyModel.findByPk(id);
+
+        if (!butterfly) {
+            return res.status(404).json({ message: "Mariposa no encontrada" });
+        }
+
+        await butterfly.update(req.body);
+        res.status(200).json(butterfly);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
 // POST - create butterfly
 export const createButterfly = async (req, res) => {
   try {
