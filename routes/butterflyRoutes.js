@@ -20,3 +20,4 @@ router.delete("/:id", idParamRules, validateResult, deleteButterfly);
 router.put("/:id", idParamRules, validateResult, updateButterfly);
 
 export default router;
+
