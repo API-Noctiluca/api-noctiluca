@@ -1,13 +1,18 @@
 import express from "express";
-import {
-  createButterfly,
-  deleteButterfly,
-} from "../controllers/ButterflyController.js";
+import {getAllButterflies, createButterfly,deleteButterfly} from "../controllers/ButterflyController.js";
+
+import {butterflyBodyRules, idParamRules, validateResult} from "../validators/butterfliesValidator.js";
 
 const router = express.Router();
 
-router.post("/", createButterfly);
-router.delete("/:id", deleteButterfly);
+// GET - listado de todas las mariposas
+router.get("/", getAllButterflies);
+
+// POST - crear mariposa (con validaciones)
+router.post("/", butterflyBodyRules, validateResult, createButterfly);
+
+// DELETE - borrar mariposa (validar id)
+router.delete("/:id", idParamRules, validateResult, deleteButterfly);
 
 export default router;
 
