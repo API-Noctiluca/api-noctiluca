@@ -1,9 +1,9 @@
 import express from "express";
 import {
-  getAllButterflies,
   createButterfly,
   deleteButterfly,
 } from "../controllers/ButterflyController.js";
+import { getAllButterflies } from "../controllers/ButterflyControllers1.js";
 
 const router = express.Router();
 
