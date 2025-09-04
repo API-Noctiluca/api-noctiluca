@@ -1,4 +1,4 @@
 node_modules
-.env
+.env*
 docs_mariany.md
-
+doc_guissella.md
