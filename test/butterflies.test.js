@@ -2,7 +2,6 @@ import request from "supertest";
 import { app, server } from "../app.js"
 import db_connection from "../database/db_connection.js"
 import ButterflyModel from "../models/ButterflyModel.js";
-import { updateButterfly } from "../controllers/ButterflyController.js";
 
 describe("test butterflies crud", () => {
     beforeAll(async () => { // antes de todo se conecta
@@ -61,7 +60,7 @@ describe("test butterflies crud", () => {
     })
 
     //Método POST one butterfly/:id
-    describe("POST /Bbutterflies", () => {
+    describe("POST /Butterflies", () => {
         let response
         let newButterflyData = {
             name: "Test Butterfly",
@@ -93,12 +92,33 @@ describe("test butterflies crud", () => {
             //Se puede añadir más campos si se quiere
         })
 
+        test('should return 400 if required field is missing', async () => {
+            const invalidButterfly = {
+                //falta nombre
+                family: "Testidae",
+                location: "Testland",
+                habitat: "Test habitat",
+                morphology: "test morphology",
+                life: "Test life cycle",
+                feeding: "test food", 
+                conservation: "Test conservation",
+                about_conservation: "LC",
+                image: "test.jpg"
+            }
+
+            const response = await request(app).post("/api/butterflies").send(invalidButterfly)
+
+            expect(response.status).toBe(400) // Depende de cómo manejes errores en tu controlador
+            expect(response.body).toHaveProperty("errors") //si devuelves un campo error en el JSON
+        })
+
         test('should actually exist in the database', async () => {
             const foundButterfly = await ButterflyModel.findOne({where: {id: response.body.id}})
             expect(foundButterfly).not.toBeNull()
             expect(foundButterfly.name).toBe(newButterflyData.name)
         })
     })
+
     //Método PUT one butterfly/:id
     describe("PUT /butterflies/:id", () => {
         let response 
@@ -149,6 +169,7 @@ describe("test butterflies crud", () => {
             expect(butterflyInDB.image).toBe(updatedData.image)
         })
     })
+
     //Método DELETE one butterfly/:id
     describe("DELETE /butterflies", () => {
         let response
@@ -184,6 +205,12 @@ describe("test butterflies crud", () => {
     })
 
     afterAll(async () => { // funciona como el beforeAll, después de cada testeo lo apagamos/cerramos
-        server.close() // para que Jest no se quede colgado
+        try {
+            await db_connection.truncate({ cascade: true }) //Borra todos los datos de todas las tablas
+            server.close() // para que Jest no se quede colgado
+            await db_connection.close()
+        } catch (error) {
+            console.error("Error limpiando/cerrando la BD de test:", err)
+        }
     })
 })
