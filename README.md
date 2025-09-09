@@ -101,7 +101,6 @@ Se usa **Jest + Supertest** para pruebas unitarias y de integración.
 
 ### Ejecutar tests
 ```bash
-npm test
 Ejemplo de test
 
 test('GET /butterflies should return array', async () => {
@@ -109,22 +108,26 @@ test('GET /butterflies should return array', async () => {
   expect(response.status).toBe(200);
   expect(response.body).toBeInstanceOf(Array);
 });
-📬 Endpoints
-🔹 GET all butterflies
-http
+```
+## 📬 Endpoints
 
+### 👉 GET all butterflies
+```
 GET /api/butterflies
-🔹 GET one butterfly
-http
-
+```
+--- 
+### 👉 GET one butterfly
+```
 GET /api/butterflies/:id
-🔹 POST create butterfly
-http
-
+```
+---
+### 👉 POST create butterfly
+```
 POST /api/butterflies
-Body (JSON)
-json
-
+```
+---
+### 👉 Body (JSON)
+```
 {
   "name": "Papilio machaon",
   "family": "Papilionidae",
@@ -137,22 +140,27 @@ json
   "about_conservation": "LC",
   "image": "machaon.jpg"
 }
-🔹 PUT update butterfly
-http
-
+```
+---
+### 👉 PUT update butterfly
+```
 PUT /api/butterflies/:id
-🔹 DELETE butterfly
-http
-
+```
+---
+### 👉 DELETE butterfly
+```
 DELETE /api/butterflies/:id
-💻 Ejemplos cURL
-bash
-
-# GET all
-curl -X GET http://localhost:3000/api/butterflies
-
-# POST create
-curl -X POST http://localhost:3000/api/butterflies \
+```
+---
+## 💻 Ejemplos CURL
+### 👉 GET all
+```
+curl -X GET http://localhost:4000/api/butterflies
+```
+---
+## 👉 POST create
+```
+curl -X POST http://localhost:4000/api/butterflies \
 -H "Content-Type: application/json" \
 -d '{
   "name": "Papilio machaon",
@@ -166,13 +174,17 @@ curl -X POST http://localhost:3000/api/butterflies \
   "about_conservation": "LC",
   "image": "machaon.jpg"
 }'
-
 ```
 ---
-🌐 Documentación Postman
-Consulta toda la documentación de la API haciendo clic en el siguiente enlace:
+## 🌐 Documentación Postman
 
-<p align="left"> <img src="./assets/postman.jpg" alt="Postman" width="120"/>[https://www.postman.com/tu-link-de-documentacion] </p>
+Consulta toda la documentación de la API haciendo clic en el logo:
+
+<div align="center">
+  <a href="https://documenter.getpostman.com/view/46421388/2sB3HnJKMj" target="_blank">
+    <img src="./assets/postman.jpg" alt="Postman" width="120"/>
+  </a>
+</div>
 
 ---
 
