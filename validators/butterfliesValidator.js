@@ -7,7 +7,7 @@ export const butterflyBodyRules = [
   body("name")
     .trim()
     .notEmpty().withMessage("El nombre es obligatorio")
-    .isLength({ max: 150 }).withMessage("Debe tener entre 3 y 50 caracteres"),
+     .isLength({ min: 4, max: 150 }).withMessage("El nombre debe tener entre 4 y 150 caracteres"),
   
   body("other_names")
     .optional().isString().trim()
